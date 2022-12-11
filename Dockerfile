@@ -4,11 +4,12 @@ ENV VIRTUAL_ENV=/opt/venv
 RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
+WORKDIR /src
+
 # Install dependencies:
-COPY requirements.txt .
+COPY . .
 RUN python3 -m pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install -r dev-requirements.txt
 
 # Run the application:
-COPY myapp.py .
-CMD ["python", "myapp.py"]
+CMD ["python", "main.py"]
